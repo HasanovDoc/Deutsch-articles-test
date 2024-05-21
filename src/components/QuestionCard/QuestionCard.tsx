@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 interface IQuestionCard{
@@ -11,6 +11,7 @@ interface IQuestionCard{
 
 interface ICheckBox{
     checked: boolean
+    visible: boolean
 }
 
 interface IQuestionContainer {
@@ -22,11 +23,9 @@ const QuestionCard = ({eng_word, questiodId, children, answer_1, answer_2}:IQues
     const [checkedStates, setCheckedStates] = useState(variants.map(() => false));
     const [userInput, setUserInput] = useState('');
     const [isVisible, setIsVisible] = useState(true);
-    const [isCorrectAnswer, setIsCorrectAnswer] = useState(false)
 
     const handleClick = (index: number) => {
         setCheckedStates(checkedStates.map((checked, i) => i === index));
-        
         if (userInput !== answer_1 || variants[index] !== answer_2) {
             console.log('Ответ не засчитан');
         }
@@ -35,11 +34,23 @@ const QuestionCard = ({eng_word, questiodId, children, answer_1, answer_2}:IQues
             console.log('Урааааааа Ответ засчитан!!!!!!!!!!');
         }
     };
+
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUserInput(event.target.value);
     };
 
-    return (
+    const [shouldRender, setShouldRender] = useState(true);
+
+    useEffect(() => {
+        if (!isVisible) {
+            const timer = setTimeout(() => {
+                setShouldRender(false);
+            }, 1000);
+            return () => clearTimeout(timer);
+        }
+    }, [isVisible]);
+
+    return shouldRender ? (
         <QuestionCardContainer visible={isVisible}>
             <QuestionHeader>
                 {eng_word}
@@ -55,6 +66,7 @@ const QuestionCard = ({eng_word, questiodId, children, answer_1, answer_2}:IQues
                             key={index}
                             checked={checkedStates[index]}
                             onClick={() => handleClick(index)}
+                            visible={isVisible}
                             >
                                 {item}
                             </CheckboxButton>
@@ -63,24 +75,21 @@ const QuestionCard = ({eng_word, questiodId, children, answer_1, answer_2}:IQues
                 </QuestionCardAnswersList>
             </QuestionCardMain>
         </QuestionCardContainer>
-    )
+    ):null;
 };
 
 export default QuestionCard;
 
 
 const hideContainer = `
-    transition: all 2s ease-in-out;
     transform: translateX(-100%);
     opacity: 0;
     display: none;
 `;
 
-const noHideContainer = `
-    opacity: 1;
-`
 
 const QuestionCardContainer = styled.div<IQuestionContainer>`
+    transition: all 1s ease-in-out;
     ${props => props.visible ? `` : `${hideContainer}`};
     margin: 5vh 5vw;
     width: 30vw;
@@ -139,9 +148,10 @@ const QuestionCardAnswersList = styled.div`
 `;
 
 const CheckboxButton = styled.button<ICheckBox>`
-  background-color: ${props => props.checked ? 'green' : 'rgba(255,255,255,0.27)'};
+  background-color: ${props => props.checked ? (props.visible ? 'red' : 'green') : 'rgba(255,255,255,0.27)'};
   /* background-color: rgba(255, 255, 255, 0.496); */
   color: white;
+  opacity: 0.85;
   border: none;
   padding: 10px;
   margin: 5px;
@@ -149,8 +159,7 @@ const CheckboxButton = styled.button<ICheckBox>`
   border-radius: 3px;
   scale: ${props => props.checked ? '110%' : '100%'};
   &:hover{
-    /* background-color: ${props => props.checked ? '#008000a6' : '#ff0000a9'}; */
-    opacity: 0.7;
+    opacity: 1;
     scale: 110%;
   }
 `;

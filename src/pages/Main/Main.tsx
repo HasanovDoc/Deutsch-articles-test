@@ -39,9 +39,10 @@ const QuestionList = styled.div`
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 4vh;
 `;
 
 const QuestionListItem = styled.div`
-
+    max-height: 13vh;
+    /* transition: all 2s ease-in-out; */
 `;
