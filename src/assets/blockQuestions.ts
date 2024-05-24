@@ -1,12 +1,5 @@
 export const block_1=[
     {
-        id: 1,
-        eng_word: "time",
-        de_word: "zeit",
-        article_list: "die das dev der",
-        answer: "die"
-    },
-    {
         id: 2,
         eng_word: "the dog",
         de_word: "Hund",

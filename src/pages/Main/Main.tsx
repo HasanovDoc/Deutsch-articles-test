@@ -11,10 +11,12 @@ const Main=()=>{
     useEffect(() => {
         const handleHashChange = () => setHash(window.location.hash);
         window.addEventListener('hashchange', handleHashChange);
-        return () => window.removeEventListener('hashchange', handleHashChange);
+        return () => window.removeEventListener('hashchange', handleHashChange);        
     }, []);
 
+
     const QuestionBlock = () =>{
+        
         switch (hash) {
             case '#action1':
                 return(<QuestionList>
@@ -88,6 +90,22 @@ const Main=()=>{
                 break;
         
             default:
+                console.log(hash)
+                return(<QuestionList>
+                    {block_1.map((item)=>{
+                        return (
+                            <QuestionListItem>
+                                <QuestionCard 
+                                eng_word={item.eng_word} 
+                                questiodId={item.id} 
+                                children={item.article_list} 
+                                answer_1={item.de_word} 
+                                answer_2={item.answer} />
+                            </QuestionListItem>
+                        )
+                    })
+                    }
+                </QuestionList>)
                 break;
         }
     }
