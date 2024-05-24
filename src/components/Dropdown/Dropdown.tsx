@@ -17,15 +17,21 @@ const Dropdown = ({ children }:IDropDownProps) => {
         {children}
       </DropdownButton>
       <DropdownContent show={show}>
-        <DropdownItem href="#action1">Действие 1</DropdownItem>
-        <DropdownItem href="#action2">Действие 2</DropdownItem>
-        <DropdownItem href="#action3">Действие 3</DropdownItem>
+        <DropdownItem onClick={() => setShow(!show)} href="#action1">Животные ( Die Tiere)</DropdownItem>
+        <DropdownItem onClick={() => setShow(!show)} href="#action2">Одежда (Die Kleidung) </DropdownItem>
+        <DropdownItem onClick={() => setShow(!show)} href="#action3">Еда (Das Essen)</DropdownItem>
+        <DropdownItem onClick={() => setShow(!show)} href="#action4">Семья (Die Familie)</DropdownItem>
       </DropdownContent>
     </DropdownContainer>
   );
 };
 
 export default Dropdown;
+
+// cosnt dropDownBlock_1 = () =>{}
+// cosnt dropDownBlock_1 = () =>{}
+// cosnt dropDownBlock_1 = () =>{}
+// cosnt dropDownBlock_1 = () =>{}
 
 const DropdownContainer = styled.div`
   position: relative;
