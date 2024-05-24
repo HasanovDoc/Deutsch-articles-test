@@ -134,10 +134,15 @@ const StyledInput = styled.input`
   border: 2px solid #5546c5;
   border-radius: 4px;
   outline: none;
+  /* color: white; */
   transition: all 0.3s ease-in-out;
+  /* background-color: cyan; */
+  /* background-color: black; */
+  opacity: 0.72;
 
   &:focus {
     /* border-color: purple; */
+    opacity: 0.9;
     box-shadow: 0 0 5px #5546c5;
   }
 `;

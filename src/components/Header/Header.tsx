@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { HeaderLogo } from '../../assets/HeaderLogo'
 import Dropdown from "../Dropdown/Dropdown";
-import QuestionCard from "../QuestionCard/QuestionCard";
 
 export const Header=()=>{
     return(
