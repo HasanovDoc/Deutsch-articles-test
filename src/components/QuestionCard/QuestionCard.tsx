@@ -27,11 +27,11 @@ const QuestionCard = ({eng_word, questiodId, children, answer_1, answer_2}:IQues
     const handleClick = (index: number) => {
         setCheckedStates(checkedStates.map((checked, i) => i === index));
         if (userInput !== answer_1 || variants[index] !== answer_2) {
-            console.log('Ответ не засчитан');
+            // console.log('Ответ не засчитан');
         }
         else{
             setIsVisible(false);
-            console.log('Урааааааа Ответ засчитан!!!!!!!!!!');
+            // console.log('Урааааааа Ответ засчитан!!!!!!!!!!');
         }
     };
 
